@@ -1,0 +1,309 @@
+:root {
+  --primary-color: #ff5252; /* 香澄的代表色红色 */
+  --secondary-color: #ffca28; /* 星星黄 */
+  --bg-color: #fffaf0; /* 暖色调原色背景 */
+  --text-color: #333;
+  --card-bg: rgba(255, 255, 255, 0.85);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", "M PLUS Rounded 1c", sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 202, 40, 0.15) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 82, 82, 0.1) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.8) 0%,
+      transparent 60%
+    );
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 背景星星动画 */
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="rgba(255, 202, 40, 0.3)" transform="scale(0.2) translate(100, 100)"/><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="rgba(255, 82, 82, 0.2)" transform="scale(0.15) translate(400, 300)"/></svg>')
+    repeat;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 头部样式 */
+.hero {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(255, 82, 82, 0.2);
+  background: white;
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease;
+  border: 3px solid white;
+}
+
+.hero-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center 35%;
+  -webkit-user-drag: none; /* Prevent image dragging */
+  user-select: none;
+}
+
+.pico-img {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  z-index: 9999;
+  cursor: grab; /* Indicate it's draggable */
+  filter: drop-shadow(0 10px 15px rgba(255, 82, 82, 0.4));
+}
+
+.pico-img:active {
+  cursor: grabbing;
+}
+
+.hero-content {
+  padding: 30px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), #ffffff);
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 6px dashed var(--secondary-color);
+  position: relative;
+}
+
+.stars-decoration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.star {
+  font-size: 2.2rem;
+  animation:
+    spin 8s linear infinite,
+    float 3s ease-in-out infinite alternate;
+}
+
+.star-left {
+  color: var(--primary-color);
+  text-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+}
+
+.star-right {
+  color: var(--secondary-color);
+  text-shadow: 0 0 10px rgba(255, 202, 40, 0.5);
+  animation-delay: -1.5s; /* 错开动画时间 */
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+.main-title {
+  font-family: "Fredoka One", "M PLUS Rounded 1c", cursive;
+  font-size: 3.5rem;
+  margin: 0;
+  color: var(--primary-color);
+  /* 卡通双层阴影效果 */
+  text-shadow:
+    3px 3px 0px var(--secondary-color),
+    -2px -2px 0px white,
+    0 5px 15px rgba(255, 82, 82, 0.4);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #ff7675; /* 较柔和的红色 */
+  margin-top: 12px;
+  font-weight: 800;
+}
+
+/* 项目子域名部分 */
+.projects-section {
+  width: 100%;
+  margin-top: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  width: 100%;
+}
+
+/* 卡片样式：活泼、圆润、带有强烈的色彩感 */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background: var(--card-bg);
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: all 0.5s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: white;
+}
+
+.project-card:hover::after {
+  animation: shine 0.7s;
+}
+
+@keyframes shine {
+  100% {
+    left: 200%;
+  }
+}
+
+.project-title {
+  font-family: "Fredoka One", "M PLUS Rounded 1c", cursive;
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.project-desc {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  opacity: 0.95;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 页脚 */
+.footer {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #ff7675;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.copyright {
+  font-size: 0.95rem;
+  color: #999;
+  font-weight: normal;
+}
+
+/* 动画：项目卡片载入 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 650px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+  .hero-image {
+    height: 250px;
+  }
+  .project-card {
+    padding: 25px 15px;
+  }
+  .project-title {
+    font-size: 1.6rem;
+  }
+}

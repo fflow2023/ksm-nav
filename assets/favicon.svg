@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient id="starGradient" x1="0%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#FFCA28" />
+      <stop offset="100%" stop-color="#FF5252" />
+    </linearGradient>
+  </defs>
+
+  <!-- 手绘风格外星 -->
+  <!-- 使用二次贝塞尔曲线 (Q) 和稍微不规则的坐标(稍微歪扭) 来表现手绘涂鸦的线条粗细变化和随意感 -->
+  <path 
+    d="M 48 8 
+       Q 52 23 58 35 
+       Q 78 30 96 38 
+       Q 81 50 69 57 
+       Q 75 76 77 91 
+       Q 63 76 50 66 
+       Q 31 79 19 88 
+       Q 25 72 32 55 
+       Q 15 45 4 33 
+       Q 25 36 41 34 
+       Q 43 20 48 8 
+       Z" 
+    fill="none" 
+    stroke="url(#starGradient)" 
+    stroke-width="7" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    filter="url(#glow)" 
+  />
+
+  <!-- 内部随意画的一圈轨迹虚线 -->
+  <path 
+    d="M 50 18 
+       Q 54 28 56 38 
+       Q 72 35 84 41 
+       Q 72 49 61 55 
+       Q 65 67 67 79 
+       Q 56 68 50 63 
+       Q 36 71 28 81 
+       Q 31 66 36 53 
+       Q 22 47 13 38 
+       Q 31 40 43 37 
+       Q 46 25 50 18 
+       Z" 
+    fill="none" 
+    stroke="#FFF3E0" 
+    stroke-width="2.5" 
+    stroke-dasharray="5 7" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+  />
+</svg>
