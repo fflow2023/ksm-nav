@@ -6,6 +6,15 @@
   --card-bg: rgba(255, 255, 255, 0.85);
 }
 
+/* 夜间主题变量 */
+[data-theme="dark"] {
+  --primary-color: #ff6b6b;
+  --secondary-color: #ffd93d;
+  --bg-color: #1a1a2e;
+  --text-color: #e6e6e6;
+  --card-bg: rgba(255, 255, 255, 0.1);
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -64,6 +73,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+}
+
+.theme-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3);
+}
+
+.theme-btn:hover {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 6px 20px rgba(255, 82, 82, 0.5);
 }
 
 /* 头部样式 */
@@ -258,6 +295,21 @@ body {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* 项目预览图标 */
+.project-preview {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.project-card:hover .project-preview {
+  opacity: 1;
+}
+
 /* 页脚 */
 .footer {
   margin-top: 60px;
@@ -292,18 +344,74 @@ body {
   }
 }
 
+/* 夜间主题特定样式 */
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 202, 40, 0.1) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 82, 82, 0.05) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 60%
+    );
+}
+
+[data-theme="dark"] .hero {
+  background: #2d2d44;
+  border-color: #444;
+}
+
+[data-theme="dark"] .hero-content {
+  background: linear-gradient(to bottom, rgba(45, 45, 68, 0.95), #2d2d44);
+}
+
+[data-theme="dark"] .footer {
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffd93d;
+}
+
+[data-theme="dark"] .copyright {
+  color: #aaa;
+}
+
 /* 响应式调整 */
 @media (max-width: 650px) {
   .main-title {
     font-size: 2.5rem;
   }
-  .hero-image {
-    height: 250px;
+  
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
   }
+  
+  .theme-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .pico-img {
+    width: 100px;
+    height: 100px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
   .project-card {
-    padding: 25px 15px;
-  }
-  .project-title {
-    font-size: 1.6rem;
+    padding: 20px 15px;
   }
 }

@@ -1,5 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("projects-container");
+  
+  // 主题切换功能
+  const themeBtn = document.getElementById("theme-btn");
+  const themeIcon = document.querySelector(".theme-icon");
+  
+  // 检查本地存储的主题设置
+  const currentTheme = localStorage.getItem("theme") || "light";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  updateThemeIcon(currentTheme);
+  
+  themeBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    updateThemeIcon(newTheme);
+    
+    // 添加切换动画
+    themeBtn.style.transform = "scale(0.8)";
+    setTimeout(() => {
+      themeBtn.style.transform = "scale(1)";
+    }, 200);
+  });
+  
+  function updateThemeIcon(theme) {
+    themeIcon.textContent = theme === "light" ? "🌙" : "☀️";
+  }
 
   // 检查配置是否存在
   if (typeof ksmConfig !== "undefined" && ksmConfig.projects) {
@@ -8,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("a");
       card.href = project.url;
       card.className = "project-card";
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
 
       // 动态设置背景渐变阴影（根据配置文件）
       card.style.background = project.color;
@@ -19,6 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.animation = `fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards ${index * 0.15}s`;
       card.style.opacity = "0";
 
+      // 添加项目预览图标
+      const previewIcon = document.createElement("div");
+      previewIcon.className = "project-preview";
+      previewIcon.innerHTML = "🔍";
+      previewIcon.title = "预览项目";
+
       const title = document.createElement("h2");
       title.className = "project-title";
       title.textContent = project.title;
@@ -27,6 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
       desc.className = "project-desc";
       desc.textContent = project.description;
 
+      // 添加项目预览功能
+      card.addEventListener("mouseenter", () => {
+        showProjectPreview(project, card);
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        hideProjectPreview();
+      });
+
+      card.appendChild(previewIcon);
       card.appendChild(title);
       card.appendChild(desc);
       container.appendChild(card);
@@ -50,6 +96,64 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 300);
     });
   });
+  
+  // 项目预览功能
+  function showProjectPreview(project, cardElement) {
+    // 移除旧的预览元素
+    hideProjectPreview();
+    
+    // 创建预览元素
+    const preview = document.createElement("div");
+    preview.id = "project-preview";
+    preview.style.cssText = `
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 15px;
+      background: ${project.color};
+      padding: 15px 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px ${project.shadow || "rgba(0, 0, 0, 0.2)"};
+      z-index: 1000;
+      min-width: 250px;
+      text-align: center;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    `;
+    
+    preview.innerHTML = `
+      <h3 style="margin: 0 0 8px 0; color: white; font-size: 1.2rem;">${project.title}</h3>
+      <p style="margin: 0; color: white; font-size: 0.85rem; line-height: 1.3;">${project.description}</p>
+      <div style="margin-top: 8px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.9);">点击访问 →</div>
+    `;
+    
+    // 在当前卡片内部添加预览
+    cardElement.style.position = 'relative';
+    cardElement.appendChild(preview);
+    
+    // 显示预览
+    setTimeout(() => {
+      preview.style.opacity = "1";
+      preview.style.transform = "translateX(-50%) translateY(0)";
+    }, 10);
+  }
+  
+  function hideProjectPreview() {
+    const preview = document.getElementById("project-preview");
+    if (preview) {
+      preview.style.opacity = "0";
+      preview.style.transform = "translateX(-50%) translateY(10px)";
+      setTimeout(() => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      }, 300);
+    }
+  }
 
   // 拖动和点击切换 Pico 小人的逻辑
   const picoImg = document.getElementById("pico-img");
@@ -76,8 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 获取当前元素的计算样式
       const style = window.getComputedStyle(picoImg);
-      initialRight = parseInt(style.right, 10);
-      initialBottom = parseInt(style.bottom, 10);
+      initialRight = parseInt(style.right, 10) || 50;
+      initialBottom = parseInt(style.bottom, 10) || 50;
 
       e.preventDefault(); // 防止默认的拖放行为（特别是在图片上）
     });
