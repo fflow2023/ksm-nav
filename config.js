@@ -15,9 +15,9 @@ const ksmConfig = {
       shadow: "rgba(255, 202, 40, 0.4)",
     },
     {
-      title: "⛏️ Minecraft",
+      title: "🧱 MC-Bench",
       url: "https://mc.ksm.indevs.in/",
-      description: "仿 MC 小游戏，用于测试 AI 能力",
+      description: "AI 单文件游戏生成测试",
       color: "linear-gradient(135deg, #66BB6A, #2E7D32)",
       shadow: "rgba(76, 175, 80, 0.4)",
     },
