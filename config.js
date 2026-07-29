@@ -21,5 +21,12 @@ const ksmConfig = {
       color: "linear-gradient(135deg, #66BB6A, #2E7D32)",
       shadow: "rgba(76, 175, 80, 0.4)",
     },
+    {
+      title: "🤖 DoriPilot",
+      url: "https://dori.ksm.indevs.in",
+      description: "BanG Dream!小助手",
+      color: "linear-gradient(135deg, #FF3B82, #26C6DA)",
+      shadow: "rgba(255, 59, 130, 0.4)",
+    },
   ],
 };
