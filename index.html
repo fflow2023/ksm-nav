@@ -1,65 +1,144 @@
 <!doctype html>
 <!-- This is a non-profit fan-made website. "BanG Dream!" and all related characters, images, and audios are the property of Bushiroad and BanG Dream! Project. -->
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ksm.indevs.in - Kirakira Dokidoki!</title>
+    <meta
+      name="description"
+      content="ksm.indevs.in — A collection of vibe coding side projects."
+    />
+    <meta name="theme-color" content="#ee2437" />
+    <title>ksm.indevs.in — Kirakira Dokidoki!</title>
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("theme");
+        const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+        document.documentElement.dataset.theme = savedTheme || preferredTheme;
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Nunito:wght@400;700;800&family=Fredoka+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=20260806c" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   </head>
-  <body>
-    <div class="stars-bg"></div>
-    <div class="theme-toggle">
-      <button id="theme-btn" class="theme-btn" aria-label="切换主题">
-        <span class="theme-icon">🌙</span>
-      </button>
-    </div>
-    <img
-      src="assets/ksm_pico1.png"
-      id="pico-img"
-      class="pico-img"
-      alt="Kasumi Pico"
-      draggable="false"
-    />
 
-    <div class="container">
-      <header class="hero">
-        <div class="hero-image-overlay"></div>
-        <img
-          src="assets/hero_image_new.png"
-          alt="Kasumi Toyama - BanG Dream!"
-          class="hero-image"
-          draggable="false"
-        />
-        <div class="hero-content">
-          <div class="stars-decoration">
-            <span class="star star-left">⭐</span>
-            <h1 class="main-title">ksm.indevs.in</h1>
-            <span class="star star-right">⭐</span>
-          </div>
-          <p class="subtitle">一个闪闪发光、心动不已的网站</p>
+  <body>
+    <a class="skip-link" href="#projects">Skip to Setlist</a>
+
+    <div class="site-shell">
+      <header class="topbar" aria-label="Site Navigation">
+        <a class="brand" href="#top" aria-label="ksm.indevs.in Home">
+          <img class="brand-icon" src="assets/favicon.svg" alt="" aria-hidden="true" />
+          <span class="brand-name">KSM.INDEVS.IN</span>
+        </a>
+
+        <div class="topbar-meta" aria-hidden="true">
+          <span>KASUMI'S LIVE HOUSE</span>
+          <span class="topbar-line"></span>
+          <span>EST. 2026</span>
         </div>
+
+        <button class="theme-button" id="theme-button" type="button" aria-label="Switch to Stage Mode">
+          <span class="theme-button-track" aria-hidden="true">
+            <span class="theme-button-knob"></span>
+          </span>
+          <span class="theme-button-label">STAGE</span>
+        </button>
       </header>
 
-      <main class="projects-section">
-        <div class="projects-grid" id="projects-container"></div>
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <img
+            src="assets/hero_image_new.webp"
+            alt="Kasumi playing red star guitar on glowing stage"
+            class="hero-image"
+            draggable="false"
+          />
+          <div class="hero-wash" aria-hidden="true"></div>
+          <div class="hero-copy">
+            <p class="hero-kicker"><span>KSM STAGE</span><span>★</span><span>PROJECT SETLIST</span></p>
+            <h1 id="hero-title">
+              <span class="hero-domain">ksm.indevs.in</span>
+            </h1>
+            <a class="hero-action" href="#projects">
+              <span>VIEW SETLIST</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13M14 7l5 5-5 5" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="hero-stamp" aria-hidden="true">
+            <span>KiRA</span>
+            <strong>★</strong>
+            <span>DoKi</span>
+          </div>
+
+          <div class="hero-caption" aria-hidden="true">
+            <span>RANDOM STAR / RED</span>
+            <span>READY TO ROCK!</span>
+          </div>
+        </section>
+
+        <div class="ticker" aria-hidden="true">
+          <div class="ticker-track">
+            <span>★ KIRAKIRA DOKIDOKI</span>
+            <span>SIDE PROJECTS / ON STAGE</span>
+            <span>★ VIBE CODING PROJECTS</span>
+            <span>KSM / SHOWTIME</span>
+            <span>★ KIRAKIRA DOKIDOKI</span>
+            <span>SIDE PROJECTS / ON STAGE</span>
+            <span>★ VIBE CODING PROJECTS</span>
+            <span>KSM / SHOWTIME</span>
+          </div>
+        </div>
+
+        <section class="projects" id="projects" aria-labelledby="projects-title">
+          <div class="projects-heading">
+            <div>
+              <p class="section-kicker">KSM LIVE HOUSE / VIBE-CODED PROJECTS</p>
+              <h2 id="projects-title">TODAY'S SETLIST</h2>
+            </div>
+            <p class="setlist-count" id="setlist-count" aria-live="polite">LOADING SETLIST…</p>
+          </div>
+
+          <div class="setlist-wrap">
+            <span class="cable cable-a" aria-hidden="true"></span>
+            <span class="cable cable-b" aria-hidden="true"></span>
+            <div class="projects-list" id="projects-container" role="list"></div>
+          </div>
+        </section>
       </main>
 
       <footer class="footer">
-        <p>🌟 Kirakira Dokidoki! 🌟</p>
-        <p class="copyright">
-          © 2026 ksm.indevs.in - Made with love for ksm </br>
-           Powered by Vibe Coding
+        <img class="footer-mark" src="assets/favicon.svg" alt="" aria-hidden="true" />
+        <p>
+          <strong>Kirakira Dokidoki!</strong>
+          <span>Side projects, on stage.</span>
         </p>
+        <p class="copyright">© 2026 KSM.INDEVS.IN</p>
       </footer>
     </div>
 
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    <button class="pico-pass" id="pico-pass" type="button" aria-label="Toggle Pico outfit or drag Pico">
+      <img
+        src="assets/ksm_pico1.webp"
+        id="pico-img"
+        class="pico-img"
+        alt="Kasumi Pico holding red star guitar"
+        draggable="false"
+      />
+      <span class="pico-dots" aria-hidden="true"><i class="is-active"></i><i></i><i></i></span>
+    </button>
+
+    <script src="config.js?v=20260806"></script>
+    <script src="script.js?v=20260806c"></script>
   </body>
 </html>
