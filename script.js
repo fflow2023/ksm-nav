@@ -34,6 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return svg;
   };
 
+  const splitProjectTitle = (value) => {
+    const title = String(value || "Untitled Project");
+    const match = title.match(
+      /^(\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic})*)\s*/u,
+    );
+    return {
+      icon: match?.[1] || "★",
+      name: title.slice(match?.[0].length || 0),
+    };
+  };
+
   const renderProjects = () => {
     const projects = typeof ksmConfig !== "undefined" ? ksmConfig.projects : undefined;
 
@@ -49,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setlistCount.textContent = `${String(projects.length).padStart(2, "0")} TRACKS / ON STAGE`;
 
     projects.forEach((project, index) => {
+      const { icon, name } = splitProjectTitle(project.title);
       const card = document.createElement("a");
       card.href = project.url;
       card.className = "project-row";
@@ -61,13 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const number = document.createElement("span");
       number.className = "project-number";
       number.textContent = `TRACK ${String(index + 1).padStart(2, "0")}`;
+      number.dataset.track = String(index + 1).padStart(2, "0");
+
+      const projectIcon = document.createElement("span");
+      projectIcon.className = "project-icon";
+      projectIcon.textContent = icon;
+      projectIcon.setAttribute("aria-hidden", "true");
 
       const copy = document.createElement("span");
       copy.className = "project-copy";
 
       const title = document.createElement("span");
       title.className = "project-title";
-      title.textContent = project.title;
+      title.textContent = name;
 
       const description = document.createElement("span");
       description.className = "project-description";
@@ -87,7 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
       launch.className = "project-launch";
       launch.append("OPEN", createArrow());
 
-      card.append(number, copy, address, launch);
+      const meta = document.createElement("span");
+      meta.className = "project-meta";
+      meta.append(address, launch);
+
+      card.append(number, projectIcon, copy, meta);
       projectsContainer.appendChild(card);
     });
   };

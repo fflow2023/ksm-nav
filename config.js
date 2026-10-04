@@ -22,13 +22,6 @@ const ksmConfig = {
       shadow: "rgba(76, 175, 80, 0.4)",
     },
     {
-      title: "🤖 DoriPilot",
-      url: "https://dori.ksm.indevs.in",
-      description: "BanG Dream! AI Assistant",
-      color: "linear-gradient(135deg, #FF3B82, #26C6DA)",
-      shadow: "rgba(255, 59, 130, 0.4)",
-    },
-    {
       title: "🔥 Emberfront Lite",
       url: "https://fflow2023.github.io/EMBERFRONT-LITE/",
       description: "Pixel Tower Defense",
